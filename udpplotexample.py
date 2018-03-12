@@ -34,17 +34,17 @@ avgFps = 0.0
 
 def update():
     global check, label, plt, lastUpdate, avgFps, rpltfunc
-    data = np.random.normal(size=(10000,50)).sum(axis=1)
-    data += 5 * np.sin(np.linspace(0, 10, data.shape[0]))
-    
+    xdata = np.linspace(0, 100, num=10000)
+    ydata = np.random.normal(size=(10000,100)).sum(axis=1)
+
     if rcheck.isChecked():
-        rplt.plot(data, clear=True, _callSync='off')  ## We do not expect a return value.
+        rplt.plot(xdata, ydata, clear=True, _callSync='off')  ## We do not expect a return value.
                                                       ## By turning off callSync, we tell
                                                       ## the proxy that it does not need to 
                                                       ## wait for a reply from the remote
                                                       ## process.
     if lcheck.isChecked():
-        lplt.plot(data, clear=True)
+        lplt.plot(ydata, clear=True)
         
     now = pg.ptime.time()
     fps = 1.0 / (now - lastUpdate)
